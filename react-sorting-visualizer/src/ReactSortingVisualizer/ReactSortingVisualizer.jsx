@@ -5,6 +5,7 @@ const MIN_NUMBER = 1
 const MAX_NUMBER = 1000
 const MIN_COUNT = 10
 const MAX_COUNT = 200
+const SCALING_FACTOR = 0.8
 
 class ReactSortingVisualizer extends React.Component{
 
@@ -13,24 +14,34 @@ class ReactSortingVisualizer extends React.Component{
 
         this.state = {
             count: MAX_COUNT,
+            maxBarHeight: 100,
             numbers: this.generateRandomNumbers(MAX_COUNT)
         }
     }
 
+    componentDidMount(){
+
+        const height = window.innerHeight
+        const maxHeight = height * SCALING_FACTOR
+        this.setState({ maxBarHeight: maxHeight })
+    }
+
     render() {
 
-        const { count, numbers } = this.state
+        const { count, maxBarHeight, numbers } = this.state
+        const scaling = maxBarHeight / Math.max(...numbers)
 
         return (
            <div className='react-sotring-visualizer-cotainer'>
 
+                
                 <div className='sorting-options-cotainer'>
                     <input type='range' min={MIN_COUNT} max={MAX_COUNT} value={count} onChange={this.handleCountChange}></input>
                 </div>
 
                 <div className='random-numbers'>
                     { numbers.map((number, index) =>
-                        <p key={index}>{number}</p>
+                        <p key={index} className='bar' style={{ height: `${number * scaling}px`}}></p>
                     )}
                 </div>
             </div> 
