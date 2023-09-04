@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import ReactSortingVisualizer from './ReactSortingVisualizer/ReactSortingVisualizer.jsx';
 import './App.css';
 

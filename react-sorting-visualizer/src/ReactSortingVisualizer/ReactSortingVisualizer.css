@@ -1,4 +1,10 @@
 input[type=range] {
+    accent-color: white;
+    cursor: pointer;
+    transition: all 0.5s ease 0s;
+}
+
+input[type=range]:hover{
     accent-color: #00FFFF;
 }
 
@@ -9,6 +15,7 @@ input[type=range] {
 }
 
 .sorting-options-cotainer{
+    display: flex;
     border: 2px solid #00FFFF;
     border-radius: 50px;
     padding: 10px;
@@ -23,5 +30,19 @@ input[type=range] {
     display: inline-block;
     width: 2px;
     background-color: #00FFFF;
-    margin-right: 5px;
+    margin-right: 9px;
 }
+
+button{
+    padding: 5px 25px;
+    margin-right: 5px;
+    margin-left: 5px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.5s ease 0s;
+  }
+
+  button:hover{
+    background-color: #00FFFF;
+  }

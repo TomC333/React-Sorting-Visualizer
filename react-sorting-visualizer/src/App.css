@@ -1,3 +1,9 @@
+*{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    color: #001d3d;
+}
+
 body{
     background-color: #001d3d;
 }
