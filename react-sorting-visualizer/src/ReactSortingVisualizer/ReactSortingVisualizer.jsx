@@ -60,12 +60,44 @@ class ReactSortingVisualizer extends React.Component{
     insertionSortHandler = () => {
         
         const { numbers } = this.state
-        
-        const sortedArray = insertionSort(numbers)
+        const { sorted, visualizer } = insertionSort(numbers)
+        //this.checkArrays(numbers, sorted )
 
-        this.setState({
-            numbers: sortedArray
-        })
+        for(let i = 0; i < visualizer.length; i++){
+
+            const bars = document.getElementsByClassName('bar')
+            const currentVisual = visualizer[i]
+
+            if(i % 2 === 0){
+                
+                setTimeout(() => {
+                    if(currentVisual[0] !== -1) bars[currentVisual[0]].style.backgroundColor = 'red'
+                    if(currentVisual[1] !== -1) bars[currentVisual[1]].style.backgroundColor = 'red'
+                    if(currentVisual[2] !== -1) bars[currentVisual[2]].style.backgroundColor = 'green' 
+                }, i * 50); 
+                
+                
+            }else{
+                
+                setTimeout(() => {
+                    if(currentVisual[0] !== -1) bars[currentVisual[0]].style.backgroundColor = 'cyan'
+                    if(currentVisual[1] !== -1) bars[currentVisual[1]].style.backgroundColor = 'cyan'
+                    if(currentVisual[2] !== -1) bars[currentVisual[2]].style.backgroundColor = 'cyan'   
+
+                    if(currentVisual[0] !== -1){
+                        const tmp = bars[currentVisual[0]].style.height
+                        bars[currentVisual[0]].style.height = bars[currentVisual[1]].style.height
+                        bars[currentVisual[1]].style.height = tmp
+                    }
+                    
+                }, i * 50);
+                               
+            }
+        }
+
+        // this.setState({
+        //     numbers: sorted
+        // })
 
     }
 
@@ -73,13 +105,31 @@ class ReactSortingVisualizer extends React.Component{
     selectionSortHandler = () => {
 
         const { numbers } = this.state
-
         const sortedArray = selectionSort(numbers)
 
         this.setState({
             numbers: sortedArray
         })
 
+    }
+
+    // Tester
+    checkArrays = (array, sorted) => {
+
+        const correct = [...array].sort((a, b) => a - b)
+        if(correct.length !== sorted.length) {
+            console.log('False')
+            return
+        }
+
+        for(let i =  0; i < correct.length; i++){
+            if(correct[i] !== sorted[i]){
+                console.log('False')
+                return
+            }
+        }
+
+        console.log('True')
     }
 
 
