@@ -111,7 +111,7 @@ class ReactSortingVisualizer extends React.Component{
                     this.changeBarColors(currentVisual, bars, PASIVE_COLOR, PASIVE_COLOR, thirdColor)
 
                     if(currentVisual[0] !== -1) this.swapBarHeights(currentVisual, bars)
-                    if(i === visualizer.length) this.isSorting = false
+                    if(i === visualizer.length - 1) this.isSorting = false
 
                 }, i * DELAY);                    
             }
