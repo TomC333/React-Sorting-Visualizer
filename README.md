@@ -9,7 +9,7 @@
 - [Features](#features-)
 - [Contributing](#contributing-)
 - [Contact](#contact-)
-- [Getting Started](#getting-started)
+- [Setup](#setup-)
 
 ## Introduction 🗨️
 
@@ -23,7 +23,7 @@ Welcome to the Sorting Visualizer React App! This interactive tool lets you visu
 
 - **Simple Interface**: Enjoy a straightforward and user-friendly design for a seamless experience.
 
-## Getting Started 🌱
+## Setup 🌱
 
 To get started with the Sorting Visualizer React App, follow these steps:
 
