@@ -9,7 +9,7 @@
 - [Features](#features-)
 - [Contributing](#contributing-)
 - [Contact](#contact-)
-- [Getting Started](#gettingstarted-)
+- [Getting Started](#getting-started)
 
 ## Introduction 🗨️
 
