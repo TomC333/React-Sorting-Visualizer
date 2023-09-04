@@ -3,11 +3,24 @@ import './ReactSortingVisualizer.css'
 import { insertionSort } from './SrotingAlgorithms/InsertionSort'
 import { selectionSort } from './SrotingAlgorithms/SelectionSort'
 
+// Min and Max values for random generator
 const MIN_NUMBER = 1
 const MAX_NUMBER = 1000
+
+// Min and Max values for range input label
 const MIN_COUNT = 10
 const MAX_COUNT = 135
+
+// Scaling value for bars, should be less than one 
 const SCALING_FACTOR = 0.8
+
+// Color values for bars
+const ACTIVE_COLOR = 'red'
+const PASIVE_COLOR = 'cyan'
+const ADDITIONAL_COLOR = 'green'
+
+// Delay time
+const DELAY = 10
 
 class ReactSortingVisualizer extends React.Component{
 
@@ -19,6 +32,8 @@ class ReactSortingVisualizer extends React.Component{
             maxBarHeight: 100,
             numbers: this.generateRandomNumbers(MAX_COUNT)
         }
+
+        this.isSorting = false
     }
 
     componentDidMount(){
@@ -56,49 +71,51 @@ class ReactSortingVisualizer extends React.Component{
         );
     }
 
+    // Function changes color of bars
+    changeBarColors = (currentVisual, bars, color1, color2, color3) => {
+        if(currentVisual[0] !== -1) bars[currentVisual[0]].style.backgroundColor = color1
+        if(currentVisual[1] !== -1) bars[currentVisual[1]].style.backgroundColor = color2
+        bars[currentVisual[2]].style.backgroundColor = color3  
+    }
+
+    // Function swaps heights of bars
+    swapBarHeights = (currentVisual, bars) => {
+        const tmp = bars[currentVisual[0]].style.height
+        bars[currentVisual[0]].style.height = bars[currentVisual[1]].style.height
+        bars[currentVisual[1]].style.height = tmp
+    }
+
     // Function handles insertion sort button
     insertionSortHandler = () => {
-        
-        const { numbers } = this.state
-        const { sorted, visualizer } = insertionSort(numbers)
-        //this.checkArrays(numbers, sorted )
 
+        if(this.isSorting) return
+        
+        this.isSorting = true
+        const { numbers } = this.state
+        const { visualizer } = insertionSort(numbers)
+
+        // Iterate visualizer array
         for(let i = 0; i < visualizer.length; i++){
 
             const bars = document.getElementsByClassName('bar')
             const currentVisual = visualizer[i]
 
-            if(i % 2 === 0){
+            // I don't know why but that code works only that way, when i removed duplicates from visualizer and used 2 setTimeout there was no more red bars xD
+            if(i % 2 === 0) setTimeout(() => {this.changeBarColors(currentVisual, bars, ACTIVE_COLOR, ACTIVE_COLOR, ADDITIONAL_COLOR)}, i * DELAY); 
                 
+            else{
                 setTimeout(() => {
-                    if(currentVisual[0] !== -1) bars[currentVisual[0]].style.backgroundColor = 'red'
-                    if(currentVisual[1] !== -1) bars[currentVisual[1]].style.backgroundColor = 'red'
-                    if(currentVisual[2] !== -1) bars[currentVisual[2]].style.backgroundColor = 'green' 
-                }, i * 50); 
-                
-                
-            }else{
-                
-                setTimeout(() => {
-                    if(currentVisual[0] !== -1) bars[currentVisual[0]].style.backgroundColor = 'cyan'
-                    if(currentVisual[1] !== -1) bars[currentVisual[1]].style.backgroundColor = 'cyan'
-                    if(currentVisual[2] !== -1) bars[currentVisual[2]].style.backgroundColor = 'cyan'   
 
-                    if(currentVisual[0] !== -1){
-                        const tmp = bars[currentVisual[0]].style.height
-                        bars[currentVisual[0]].style.height = bars[currentVisual[1]].style.height
-                        bars[currentVisual[1]].style.height = tmp
-                    }
-                    
-                }, i * 50);
-                               
+                    let thirdColor = PASIVE_COLOR
+                    if(i !== visualizer.length - 1 && visualizer[i][2] === visualizer[i + 1][2]) thirdColor = ADDITIONAL_COLOR
+                    this.changeBarColors(currentVisual, bars, PASIVE_COLOR, PASIVE_COLOR, thirdColor)
+
+                    if(currentVisual[0] !== -1) this.swapBarHeights(currentVisual, bars)
+                    if(i === visualizer.length) this.isSorting = false
+
+                }, i * DELAY);                    
             }
         }
-
-        // this.setState({
-        //     numbers: sorted
-        // })
-
     }
 
     // Function handles selection sort button
@@ -135,6 +152,8 @@ class ReactSortingVisualizer extends React.Component{
 
     // Function handles slidebar
     handleCountChange = (event) => {
+        
+        if(this.isSorting) return
 
         // Getting value from range input label
         const newCount = parseInt(event.target.value, 10)
