@@ -86,14 +86,36 @@ class ReactSortingVisualizer extends React.Component{
         bars[currentVisual[1]].style.height = tmp
     }
 
-    // Function handles insertion sort button
-    insertionSortHandler = () => {
+    // Function contains specific logic for insertion sort
+    insertionCostumLogic = (visualizer, currentVisual, bars, i) => {
 
-        if(this.isSorting) return
-        
-        this.isSorting = true
-        const { numbers } = this.state
-        const visualizer = insertionSort(numbers)
+        // Determine color of third bar
+        let thirdColor = PASIVE_COLOR
+        if(i !== visualizer.length - 1 && visualizer[i][2] === visualizer[i + 1][2]) thirdColor = ADDITIONAL_COLOR
+        this.changeBarColors(currentVisual, bars, PASIVE_COLOR, PASIVE_COLOR, thirdColor)
+
+        // Swap heights when it's necessary
+        if(currentVisual[0] !== -1) this.swapBarHeights(currentVisual, bars)
+    }
+
+    // Function contains specific logic for selection sort
+    selectionCostumLogic = (visualizer, currentVisual, bars, i) => {
+
+        // 'Turn off' previous green bar
+        if(currentVisual[2] >= 0) currentVisual[2]--;
+        this.changeBarColors(currentVisual, bars, PASIVE_COLOR, PASIVE_COLOR, PASIVE_COLOR)
+
+        // Swap heights if it's necesarry on current step 
+        if(currentVisual[2] === -2) this.swapBarHeights(currentVisual, bars)
+
+        // 'Turn off' last green bar on last step
+        if(i === visualizer.length - 1) {
+            currentVisual[2] ++
+            this.changeBarColors(currentVisual, bars, PASIVE_COLOR, PASIVE_COLOR, PASIVE_COLOR)
+        }
+    }
+
+    sortingAnimationLogic = (visualizer, costumLogic) => {
 
         // Iterate visualizer array
         for(let i = 0; i < visualizer.length; i++){
@@ -105,18 +127,22 @@ class ReactSortingVisualizer extends React.Component{
             if(i % 2 === 0) setTimeout(() => {this.changeBarColors(currentVisual, bars, ACTIVE_COLOR, ACTIVE_COLOR, ADDITIONAL_COLOR)}, i * DELAY)
                 
             else{
-                setTimeout(() => {
-
-                    let thirdColor = PASIVE_COLOR
-                    if(i !== visualizer.length - 1 && visualizer[i][2] === visualizer[i + 1][2]) thirdColor = ADDITIONAL_COLOR
-                    this.changeBarColors(currentVisual, bars, PASIVE_COLOR, PASIVE_COLOR, thirdColor)
-
-                    if(currentVisual[0] !== -1) this.swapBarHeights(currentVisual, bars)
-                    if(i === visualizer.length - 1) this.isSorting = false
-
-                }, i * DELAY);                    
+                setTimeout(() => {costumLogic(visualizer, currentVisual, bars, i)}, i * DELAY);
+                if(i === visualizer.length - 1) this.isSorting = false                    
             }
         }
+    }
+
+    // Function handles insertion sort button
+    insertionSortHandler = () => {
+
+        if(this.isSorting) return
+        
+        this.isSorting = true
+        const { numbers } = this.state
+        const visualizer = insertionSort(numbers)
+
+        this.sortingAnimationLogic(visualizer, this.insertionCostumLogic)
     }
 
     // Function handles selection sort button
@@ -128,33 +154,7 @@ class ReactSortingVisualizer extends React.Component{
         const { numbers } = this.state
         const visualizer = selectionSort(numbers)
         
-        for(let i = 0; i < visualizer.length; i++){
-
-            const bars = document.getElementsByClassName('bar')
-            const currentVisual = visualizer[i]
-
-            if(i % 2 === 0) {
-                
-                setTimeout(() => {
-
-                    this.changeBarColors(currentVisual, bars, ACTIVE_COLOR, ACTIVE_COLOR, ADDITIONAL_COLOR)
-
-                }, i * DELAY);
-            
-            }else{
-                setTimeout(() => {
-                    if(currentVisual[2] >= 0) currentVisual[2]--;
-                    this.changeBarColors(currentVisual, bars, PASIVE_COLOR, PASIVE_COLOR, PASIVE_COLOR)
-                    if(currentVisual[2] === -2) this.swapBarHeights(currentVisual, bars)
-                    if(i === visualizer.length - 1) {
-                        currentVisual[2] ++
-                        this.changeBarColors(currentVisual, bars, PASIVE_COLOR, PASIVE_COLOR, PASIVE_COLOR)
-                        this.isSorting = false
-                    }
-
-                }, i * DELAY);   
-            }
-        }
+        this.sortingAnimationLogic(visualizer, this.selectionCostumLogic)
     }
 
     // Tester
