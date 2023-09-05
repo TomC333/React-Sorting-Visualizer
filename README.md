@@ -19,7 +19,7 @@ Welcome to the Sorting Visualizer React App! This interactive tool lets you visu
 
 - **Custom Array Size**: Easily adjust the number of elements using a slider to experiment with different array sizes.
 
-- **Sorting Algorithm**: Currently supports Insertion Sort & Selection Sort with more algorithms coming soon.
+- **Sorting Algorithm**: Currently supports Insertion Sort, Selection Sort & Bubble Sort with more algorithms coming soon.
 
 - **Simple Interface**: Enjoy a straightforward and user-friendly design for a seamless experience.
 

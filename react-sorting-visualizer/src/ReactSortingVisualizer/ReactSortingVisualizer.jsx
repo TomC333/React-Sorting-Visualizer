@@ -2,6 +2,7 @@ import React from 'react'
 import './ReactSortingVisualizer.css'
 import { insertionSort } from './SrotingAlgorithms/InsertionSort'
 import { selectionSort } from './SrotingAlgorithms/SelectionSort'
+import { bubbleSort } from './SrotingAlgorithms/bubbleSort'
 
 // Min and Max values for random generator
 const MIN_NUMBER = 1
@@ -20,7 +21,7 @@ const PASIVE_COLOR = 'cyan'
 const ADDITIONAL_COLOR = 'green'
 
 // Delay time
-const DELAY = 1
+const DELAY = 10
 
 class ReactSortingVisualizer extends React.Component{
 
@@ -58,6 +59,7 @@ class ReactSortingVisualizer extends React.Component{
 
                     <button onClick={this.selectionSortHandler}>Selection Sort</button>
                     <button onClick={this.insertionSortHandler}>Insertion Sort</button>
+                    <button onClick={this.bubbleSortHandler}>Bubble Sort</button>
 
                 </div>
 
@@ -115,6 +117,13 @@ class ReactSortingVisualizer extends React.Component{
         }
     }
 
+    // Function contains specific logic for bubbble sort
+    bubbleCostumLogic = (visualizer, currentVisual, bars, i) => {
+
+        this.changeBarColors(currentVisual, bars, PASIVE_COLOR, PASIVE_COLOR, PASIVE_COLOR)
+        if(currentVisual[2] === -2) this.swapBarHeights(currentVisual, bars)
+    }
+
     sortingAnimationLogic = (visualizer, costumLogic) => {
 
         // Iterate visualizer array
@@ -127,34 +136,40 @@ class ReactSortingVisualizer extends React.Component{
             if(i % 2 === 0) setTimeout(() => {this.changeBarColors(currentVisual, bars, ACTIVE_COLOR, ACTIVE_COLOR, ADDITIONAL_COLOR)}, i * DELAY)
                 
             else{
-                setTimeout(() => {costumLogic(visualizer, currentVisual, bars, i)}, i * DELAY);
-                if(i === visualizer.length - 1) this.isSorting = false                    
+                setTimeout(() => {
+                    costumLogic(visualizer, currentVisual, bars, i)
+                    if(i === visualizer.length - 1) this.isSorting = false   
+                }, i * DELAY);
+                                 
             }
         }
     }
 
-    // Function handles insertion sort button
-    insertionSortHandler = () => {
+    // Simple helper function, just for decomposition :)
+    sortingFunctionsHandler = (sortingFunction, animationCostumLogic) => {
 
         if(this.isSorting) return
-        
-        this.isSorting = true
-        const { numbers } = this.state
-        const visualizer = insertionSort(numbers)
 
-        this.sortingAnimationLogic(visualizer, this.insertionCostumLogic)
+        this.isSorting = true;
+        const { numbers } = this.state
+        const visualizer = sortingFunction(numbers)
+
+        this.sortingAnimationLogic(visualizer, animationCostumLogic)
+    }
+
+    // Function handles bubble sort button
+    bubbleSortHandler = () => {
+        this.sortingFunctionsHandler(bubbleSort, this.bubbleCostumLogic)
+    }
+
+    // Function handles insertion sort button
+    insertionSortHandler = () => {
+        this.sortingFunctionsHandler(insertionSort, this.insertionCostumLogic)
     }
 
     // Function handles selection sort button
     selectionSortHandler = () => {
-        
-        if(this.isSorting) return
-        
-        this.isSorting = true
-        const { numbers } = this.state
-        const visualizer = selectionSort(numbers)
-        
-        this.sortingAnimationLogic(visualizer, this.selectionCostumLogic)
+        this.sortingFunctionsHandler(selectionSort, this.selectionCostumLogic)
     }
 
     // Tester
