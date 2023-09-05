@@ -20,7 +20,7 @@ const PASIVE_COLOR = 'cyan'
 const ADDITIONAL_COLOR = 'green'
 
 // Delay time
-const DELAY = 10
+const DELAY = 1
 
 class ReactSortingVisualizer extends React.Component{
 
@@ -73,13 +73,14 @@ class ReactSortingVisualizer extends React.Component{
 
     // Function changes color of bars
     changeBarColors = (currentVisual, bars, color1, color2, color3) => {
-        if(currentVisual[0] !== -1) bars[currentVisual[0]].style.backgroundColor = color1
-        if(currentVisual[1] !== -1) bars[currentVisual[1]].style.backgroundColor = color2
-        bars[currentVisual[2]].style.backgroundColor = color3  
+        if(currentVisual[0] !== -1 && currentVisual[0] !== -2) bars[currentVisual[0]].style.backgroundColor = color1
+        if(currentVisual[1] !== -1 && currentVisual[1] !== -2) bars[currentVisual[1]].style.backgroundColor = color2
+        if(currentVisual[2] !== -1 && currentVisual[2] !== -2) bars[currentVisual[2]].style.backgroundColor = color3  
     }
 
     // Function swaps heights of bars
     swapBarHeights = (currentVisual, bars) => {
+
         const tmp = bars[currentVisual[0]].style.height
         bars[currentVisual[0]].style.height = bars[currentVisual[1]].style.height
         bars[currentVisual[1]].style.height = tmp
@@ -92,7 +93,7 @@ class ReactSortingVisualizer extends React.Component{
         
         this.isSorting = true
         const { numbers } = this.state
-        const { visualizer } = insertionSort(numbers)
+        const visualizer = insertionSort(numbers)
 
         // Iterate visualizer array
         for(let i = 0; i < visualizer.length; i++){
@@ -101,7 +102,7 @@ class ReactSortingVisualizer extends React.Component{
             const currentVisual = visualizer[i]
 
             // I don't know why but that code works only that way, when i removed duplicates from visualizer and used 2 setTimeout there was no more red bars xD
-            if(i % 2 === 0) setTimeout(() => {this.changeBarColors(currentVisual, bars, ACTIVE_COLOR, ACTIVE_COLOR, ADDITIONAL_COLOR)}, i * DELAY); 
+            if(i % 2 === 0) setTimeout(() => {this.changeBarColors(currentVisual, bars, ACTIVE_COLOR, ACTIVE_COLOR, ADDITIONAL_COLOR)}, i * DELAY)
                 
             else{
                 setTimeout(() => {
@@ -120,14 +121,40 @@ class ReactSortingVisualizer extends React.Component{
 
     // Function handles selection sort button
     selectionSortHandler = () => {
-
+        
+        if(this.isSorting) return
+        
+        this.isSorting = true
         const { numbers } = this.state
-        const sortedArray = selectionSort(numbers)
+        const visualizer = selectionSort(numbers)
+        
+        for(let i = 0; i < visualizer.length; i++){
 
-        this.setState({
-            numbers: sortedArray
-        })
+            const bars = document.getElementsByClassName('bar')
+            const currentVisual = visualizer[i]
 
+            if(i % 2 === 0) {
+                
+                setTimeout(() => {
+
+                    this.changeBarColors(currentVisual, bars, ACTIVE_COLOR, ACTIVE_COLOR, ADDITIONAL_COLOR)
+
+                }, i * DELAY);
+            
+            }else{
+                setTimeout(() => {
+                    if(currentVisual[2] >= 0) currentVisual[2]--;
+                    this.changeBarColors(currentVisual, bars, PASIVE_COLOR, PASIVE_COLOR, PASIVE_COLOR)
+                    if(currentVisual[2] === -2) this.swapBarHeights(currentVisual, bars)
+                    if(i === visualizer.length - 1) {
+                        currentVisual[2] ++
+                        this.changeBarColors(currentVisual, bars, PASIVE_COLOR, PASIVE_COLOR, PASIVE_COLOR)
+                        this.isSorting = false
+                    }
+
+                }, i * DELAY);   
+            }
+        }
     }
 
     // Tester

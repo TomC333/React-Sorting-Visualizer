@@ -1,3 +1,5 @@
+import { addNewVisual, swapNumbers } from "./helperFunctions"
+
 export const insertionSort = (array) => {
     
     const visualizer = []
@@ -5,6 +7,7 @@ export const insertionSort = (array) => {
     let j = 0
     let key = 0
 
+    // Just insertion sort xD
     for(let i = 1; i < array.length; i++){
         
         if(array[i] > array[i - 1]) {
@@ -26,23 +29,6 @@ export const insertionSort = (array) => {
         }
     }
 
-    return {
-        visualizer: visualizer,
-        sorted: array
-    }
+    return visualizer
 
-}
-
-function addNewVisual(visualizer, a, b, c){
-
-    const newVisual = [a, b, c]
-    visualizer.push(newVisual)
-    visualizer.push(newVisual)
-}
-
-function swapNumbers(array, i, j) {
-
-    const tmp = array[i]
-    array[i] = array[j]
-    array[j] = tmp
 }
