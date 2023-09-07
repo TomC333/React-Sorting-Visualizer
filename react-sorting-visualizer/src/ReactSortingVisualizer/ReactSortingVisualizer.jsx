@@ -3,6 +3,7 @@ import './ReactSortingVisualizer.css'
 import { insertionSort } from './SrotingAlgorithms/InsertionSort'
 import { selectionSort } from './SrotingAlgorithms/SelectionSort'
 import { bubbleSort } from './SrotingAlgorithms/bubbleSort'
+import { mergeSort } from './SrotingAlgorithms/mergeSort'
 
 // Min and Max values for random generator
 const MIN_NUMBER = 1
@@ -21,7 +22,7 @@ const PASIVE_COLOR = 'cyan'
 const ADDITIONAL_COLOR = 'green'
 
 // Delay time
-const DELAY = 10
+const DELAY = 1
 
 class ReactSortingVisualizer extends React.Component{
 
@@ -60,6 +61,7 @@ class ReactSortingVisualizer extends React.Component{
                     <button onClick={this.selectionSortHandler}>Selection Sort</button>
                     <button onClick={this.insertionSortHandler}>Insertion Sort</button>
                     <button onClick={this.bubbleSortHandler}>Bubble Sort</button>
+                    <button onClick={this.mergeSortHandler}>Merge Sort</button>
 
                 </div>
 
@@ -155,6 +157,10 @@ class ReactSortingVisualizer extends React.Component{
         const visualizer = sortingFunction(numbers)
 
         this.sortingAnimationLogic(visualizer, animationCostumLogic)
+    }
+
+    mergeSortHandler = () => {
+        this.sortingFunctionsHandler(mergeSort, null)
     }
 
     // Function handles bubble sort button
