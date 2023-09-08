@@ -1,7 +1,7 @@
 import React from 'react'
 import './ReactSortingVisualizer.css'
 import { insertionSort } from './SrotingAlgorithms/InsertionSort'
-import { selectionSort } from './SrotingAlgorithms/SelectionSort'
+import { selectionSort } from './SrotingAlgorithms/selectionSort'
 import { bubbleSort } from './SrotingAlgorithms/bubbleSort'
 import { mergeSort } from './SrotingAlgorithms/mergeSort'
 
@@ -154,8 +154,18 @@ class ReactSortingVisualizer extends React.Component{
 
         this.isSorting = true;
         const { numbers } = this.state
+        const test = [...numbers]
+
+        console.log(numbers)
         const visualizer = sortingFunction(numbers)
 
+        this.checkArrays(test, numbers)
+        console.log(numbers)
+
+        if(animationCostumLogic === null) {
+            this.isSorting = false
+            return
+        }
         this.sortingAnimationLogic(visualizer, animationCostumLogic)
     }
 
