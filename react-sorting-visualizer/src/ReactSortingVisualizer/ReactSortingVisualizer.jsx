@@ -22,7 +22,8 @@ const PASIVE_COLOR = 'cyan'
 const ADDITIONAL_COLOR = 'green'
 
 // Delay time
-const DELAY = 20
+const MIN_DELAY = 0
+const MAX_DELAY = 50
 
 class ReactSortingVisualizer extends React.Component{
 
@@ -30,6 +31,7 @@ class ReactSortingVisualizer extends React.Component{
         super(props)
 
         this.state = {
+            delay: MIN_DELAY,
             count: MAX_COUNT,
             maxBarHeight: 100,
             numbers: this.generateRandomNumbers(MAX_COUNT)
@@ -49,7 +51,7 @@ class ReactSortingVisualizer extends React.Component{
 
     render() {
 
-        const { count, maxBarHeight, numbers } = this.state
+        const { delay, count, maxBarHeight, numbers } = this.state
         const scaling = maxBarHeight / Math.max(...numbers)
         this.scaling = scaling
 
@@ -58,7 +60,19 @@ class ReactSortingVisualizer extends React.Component{
 
                 <div className='sorting-options-cotainer'>
                     
-                    <input type='range' min={MIN_COUNT} max={MAX_COUNT} value={count} onChange={this.handleCountChange}></input>
+                    <div className='slider-container'>
+                        <label for='count-slider'>Numbers </label>
+                        <input id='count-slider' type='range' min={MIN_COUNT} max={MAX_COUNT} value={count} onChange={this.handleCountChange}></input>
+                    </div>
+
+                    <div className='slider-container'>
+                        <label for='delay-slider'>Delay</label>
+                        <input id='delay-slider' type='range' min={MIN_DELAY} max={MAX_DELAY} value={delay} onChange={this.handleDelayChange}></input>
+                    </div>
+
+                    <button onClick={this.randomizeButtonHandler}>Randomize</button>
+
+                    <div className='splitter'></div>
 
                     <button onClick={this.selectionSortHandler}>Selection Sort</button>
                     <button onClick={this.insertionSortHandler}>Insertion Sort</button>
@@ -143,6 +157,9 @@ class ReactSortingVisualizer extends React.Component{
 
     sortingAnimationLogic = (visualizer, costumLogic) => {
 
+        const { delay } = this.state
+        console.log(delay)
+
         // Iterate visualizer array
         for(let i = 0; i < visualizer.length; i++){
 
@@ -150,13 +167,13 @@ class ReactSortingVisualizer extends React.Component{
             const currentVisual = visualizer[i]
 
             // I don't know why but that code works only that way, when i removed duplicates from visualizer and used 2 setTimeout there was no more red bars xD
-            if(i % 2 === 0) setTimeout(() => {this.changeBarColors(currentVisual, bars, ACTIVE_COLOR, ACTIVE_COLOR, ADDITIONAL_COLOR)}, i * DELAY)
+            if(i % 2 === 0) setTimeout(() => {this.changeBarColors(currentVisual, bars, ACTIVE_COLOR, ACTIVE_COLOR, ADDITIONAL_COLOR)}, i * delay)
                 
             else{
                 setTimeout(() => {
                     costumLogic(visualizer, currentVisual, bars, i)
                     if(i === visualizer.length - 1) this.isSorting = false   
-                }, i * DELAY);
+                }, i * delay);
                                  
             }
         }
@@ -193,27 +210,30 @@ class ReactSortingVisualizer extends React.Component{
         this.sortingFunctionsHandler(selectionSort, this.selectionCostumLogic)
     }
 
-    // Tester
-    checkArrays = (array, sorted) => {
+    randomizeButtonHandler = () => {
 
-        const correct = [...array].sort((a, b) => a - b)
-        if(correct.length !== sorted.length) {
-            console.log('False')
-            return
-        }
+        if(this.isSorting) return
 
-        for(let i =  0; i < correct.length; i++){
-            if(correct[i] !== sorted[i]){
-                console.log('False')
-                return
-            }
-        }
+        const { count } = this.state
 
-        console.log('True')
+        this.setState({
+            numbers: this.generateRandomNumbers(count)
+        })
+    }
+
+    // Function handles delay slidebar
+    handleDelayChange = (event) => {
+
+        if(this.isSorting) return
+
+        const newDelay = parseInt(event.target.value, 10)
+        this.setState({
+            delay: newDelay
+        })
     }
 
 
-    // Function handles slidebar
+    // Function handles counter slidebar
     handleCountChange = (event) => {
         
         if(this.isSorting) return
