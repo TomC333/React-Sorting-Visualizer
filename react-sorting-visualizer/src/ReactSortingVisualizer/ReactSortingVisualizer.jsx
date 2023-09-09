@@ -1,20 +1,20 @@
 import React from 'react'
 import './ReactSortingVisualizer.css'
-import { insertionSort } from './SrotingAlgorithms/InsertionSort'
-import { selectionSort } from './SrotingAlgorithms/selectionSort'
-import { bubbleSort } from './SrotingAlgorithms/bubbleSort'
-import { mergeSort } from './SrotingAlgorithms/mergeSort'
+import { insertionSort } from './SortingAlgorithms/InsertionSort'
+import { selectionSort } from './SortingAlgorithms/selectionSort'
+import { bubbleSort } from './SortingAlgorithms/bubbleSort'
+import { mergeSort } from './SortingAlgorithms/mergeSort'
 
 // Min and Max values for random generator
 const MIN_NUMBER = 1
-const MAX_NUMBER = 1000
+const MAX_NUMBER = 930
 
 // Min and Max values for range input label
 const MIN_COUNT = 10
-const MAX_COUNT = 135
+const MAX_COUNT = 100
 
 // Scaling value for bars, should be less than one 
-const SCALING_FACTOR = 0.8
+const SCALING_FACTOR = 0.7
 
 // Color values for bars
 const ACTIVE_COLOR = 'red'
@@ -22,7 +22,7 @@ const PASIVE_COLOR = 'cyan'
 const ADDITIONAL_COLOR = 'green'
 
 // Delay time
-const DELAY = 1
+const DELAY = 20
 
 class ReactSortingVisualizer extends React.Component{
 
@@ -36,6 +36,7 @@ class ReactSortingVisualizer extends React.Component{
         }
 
         this.isSorting = false
+        this.scaling = 0
     }
 
     componentDidMount(){
@@ -50,6 +51,7 @@ class ReactSortingVisualizer extends React.Component{
 
         const { count, maxBarHeight, numbers } = this.state
         const scaling = maxBarHeight / Math.max(...numbers)
+        this.scaling = scaling
 
         return (
            <div className='react-sotring-visualizer-cotainer'>
@@ -77,6 +79,7 @@ class ReactSortingVisualizer extends React.Component{
 
     // Function changes color of bars
     changeBarColors = (currentVisual, bars, color1, color2, color3) => {
+        if(currentVisual[2] === -3) return
         if(currentVisual[0] !== -1 && currentVisual[0] !== -2) bars[currentVisual[0]].style.backgroundColor = color1
         if(currentVisual[1] !== -1 && currentVisual[1] !== -2) bars[currentVisual[1]].style.backgroundColor = color2
         if(currentVisual[2] !== -1 && currentVisual[2] !== -2) bars[currentVisual[2]].style.backgroundColor = color3  
@@ -88,6 +91,11 @@ class ReactSortingVisualizer extends React.Component{
         const tmp = bars[currentVisual[0]].style.height
         bars[currentVisual[0]].style.height = bars[currentVisual[1]].style.height
         bars[currentVisual[1]].style.height = tmp
+    }
+
+    // Function assigns new value to bars
+    assignNewHeight = (currentVisual, bars) => {
+        bars[currentVisual[0]].style.height = (currentVisual[1] * this.scaling) + "px" 
     }
 
     // Function contains specific logic for insertion sort
@@ -126,6 +134,13 @@ class ReactSortingVisualizer extends React.Component{
         if(currentVisual[2] === -2) this.swapBarHeights(currentVisual, bars)
     }
 
+    // Function contains specific logic for merge sort
+    mergeCustomLogic = (visualizer, currentVisual, bars, i) => {
+    
+        this.changeBarColors(currentVisual, bars, PASIVE_COLOR, PASIVE_COLOR, PASIVE_COLOR)
+        if(currentVisual[2] === -3) this.assignNewHeight(currentVisual, bars)
+    }
+
     sortingAnimationLogic = (visualizer, costumLogic) => {
 
         // Iterate visualizer array
@@ -154,23 +169,13 @@ class ReactSortingVisualizer extends React.Component{
 
         this.isSorting = true;
         const { numbers } = this.state
-        const test = [...numbers]
-
-        console.log(numbers)
         const visualizer = sortingFunction(numbers)
 
-        this.checkArrays(test, numbers)
-        console.log(numbers)
-
-        if(animationCostumLogic === null) {
-            this.isSorting = false
-            return
-        }
         this.sortingAnimationLogic(visualizer, animationCostumLogic)
     }
 
     mergeSortHandler = () => {
-        this.sortingFunctionsHandler(mergeSort, null)
+        this.sortingFunctionsHandler(mergeSort, this.mergeCustomLogic)
     }
 
     // Function handles bubble sort button

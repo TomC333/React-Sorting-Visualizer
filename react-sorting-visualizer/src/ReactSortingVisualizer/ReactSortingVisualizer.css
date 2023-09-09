@@ -23,14 +23,16 @@ input[type=range]:hover{
 }
 
 .random-numbers{
-    margin-top: 50px;
+    margin-top: 75px;
+    border-bottom: 5px solid #00FFFF;
 }
 
 .bar{
     display: inline-block;
-    width: 2px;
+    width: 3px;
     background-color: #00FFFF;
-    margin-right: 9px;
+    margin-right: 5px;
+    margin-left: 5px;
 }
 
 button{
@@ -43,6 +45,6 @@ button{
     transition: all 0.5s ease 0s;
   }
 
-  button:hover{
+button:hover{
     background-color: #00FFFF;
-  }
+}
