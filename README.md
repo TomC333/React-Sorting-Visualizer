@@ -3,6 +3,10 @@
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/Toms343/React-Sorting-Visualizer)
 [![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/Toms343/React-Sorting-Visualizer/blob/main/LICENSE)
 
+![SortingApp](https://github.com/Toms343/React-Sorting-Visualizer/blob/main/Images/App.png)
+![SelectionSort](https://github.com/Toms343/React-Sorting-Visualizer/blob/main/Images/SelectionSort.png)
+![MergeSort](https://github.com/Toms343/React-Sorting-Visualizer/blob/main/Images/MergeSort.png)
+
 ## Table of Contents 📜
 
 - [Introduction](#introductioon-)
@@ -17,7 +21,7 @@ Welcome to the Sorting Visualizer React App! This interactive tool lets you visu
 
 ## Features 👀
 
-- **Custom Array Size**: Easily adjust the number of elements using a slider to experiment with different array sizes.
+- **Custom Array Size**: Easily adjust the number of elements using a slider to experiment with different array sizes && Speed of algorithm.
 
 - **Sorting Algorithm**: Currently supports Insertion Sort, Selection Sort, Bubble Sort && Merge Sort.
 
