@@ -3,7 +3,9 @@ export interface Sorter<T> {
 }
 
 export type SortArgs<T> = {
-    /* Unsorted items */
+    /* Unsorted items
+     * NOTE: sort function should not modify this array
+     */
     items: Item<T>[];
 
     /* Compare function should return number according to rules bellow
