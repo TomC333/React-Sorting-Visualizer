@@ -1,0 +1,66 @@
+:root {
+    --primary-color: #fff4b7;
+    --secondary-color: #795757;
+    --accent-color: #664343;
+    --neutral-color: #3b3030;
+
+    font-size: 0.5rem;
+}
+
+@media screen and (min-width: 320px) {
+    :root {
+        font-size: 0.6rem;
+    }
+}
+
+@media screen and (min-width: 400px) {
+    :root {
+        font-size: 0.7rem;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    :root {
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    :root {
+        font-size: 1rem;
+    }
+}
+
+* {
+    background-color: var(--neutral-color);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+        'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: unset;
+}
+
+.sorting-visualizer {
+    width: 100vw;
+    height: 100vh;
+}
+
+.control-panel {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.control-panel-container {
+    width: fit-content;
+    height: fit-content;
+    margin: 0 1rem;
+}
+
+.visualization {
+}

@@ -1,0 +1,79 @@
+.buttons-container {
+    display: flex;
+}
+
+.button {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    width: fit-content;
+    border-radius: 0.5rem;
+    margin: 0.5rem;
+    padding: 1rem;
+    transition: all 1s;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.button.disabled {
+    background-color: var(--accent-color);
+}
+
+.button:hover {
+    cursor: pointer;
+    filter: brightness(120%);
+    transition: all 1s;
+}
+
+.button.disabled:hover {
+    cursor: not-allowed;
+    filter: none;
+}
+
+.select-elements-container {
+    display: flex;
+}
+
+select {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    width: fit-content;
+    border-radius: 0.5rem;
+    margin: 0.5rem;
+    padding: calc(1rem - 1px) 1rem;
+    transition: all 1s;
+    font-weight: bold;
+    font-size: 1.3rem;
+    border: unset;
+}
+
+.select:hover {
+    cursor: pointer;
+}
+
+.sliders-container {
+    display: flex;
+}
+
+.slider-container {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    width: fit-content;
+    border-radius: 0.5rem;
+    margin: 0.5rem;
+    padding: 1rem;
+    transition: all 1s;
+    font-weight: bold;
+    font-size: 1.3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.slider-container label {
+    background-color: var(--secondary-color);
+}
+
+.slider-container input {
+    accent-color: var(--primary-color);
+}

@@ -4,10 +4,36 @@
         <meta charset="UTF-8" />
         <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Vite + TS</title>
+        <title>Sorting Visualizer</title>
     </head>
     <body>
-        <div id="app"></div>
+        <div class="sorting-visualizer">
+            <div class="control-panel">
+                <div class="select-elements-container control-panel-container">
+                    <div id="algorithmSelect" class="select-container">
+                        <select>
+                            <option value="0">INSERTION</option>
+                            <option value="1">SELECTION</option>
+                            <option value="2">MERGE</option>
+                            <option value="3">BUBBLE</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="buttons-container control-panel-container">
+                    <div id="randomizeButton" class="button">SHUFFLE</div>
+                    <div id="sortButton" class="button">SORT</div>
+                    <div id="endButton" class="button disabled">END</div>
+                </div>
+                <div class="sliders-container control-panel-container">
+                    <div id="speedSlider" class="slider-container">
+                        <label for="sortingSpeedSlider">SPEED </label>
+                        <input id="sortingSpeedSlider" type="range" min="0" max="100" value="0"></input>
+                    </div>
+                </div>
+            </div>
+            <div class="visualization"></div>
+        </div>
+
         <script type="module" src="/web/scripts/main.ts"></script>
     </body>
 </html>
