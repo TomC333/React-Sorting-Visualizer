@@ -1,6 +1,9 @@
 import { describe, expect, test } from '@jest/globals';
 import { Insertion } from '../scripts/sorting/insertion';
+import { Selection } from '../scripts/sorting/selection';
 import { Item, SortArgs, Sorter, SortReply } from '../scripts/sorting/sorter';
+import { Bubble } from '../scripts/sorting/bubble';
+import { Merge } from '../scripts/sorting/merge';
 
 type TestSorterInfo<T> = {
     sorter: Sorter<T>;
@@ -19,6 +22,9 @@ describe('sort', () => {
 
     const sortersInfo: TestSorterInfo<number>[] = [
         { sorter: new Insertion<number>(), compare: compareNumbers },
+        { sorter: new Selection<number>(), compare: compareNumbers },
+        { sorter: new Bubble<number>(), compare: compareNumbers },
+        { sorter: new Merge<number>(), compare: compareNumbers },
     ];
 
     /* Simple function to create items */

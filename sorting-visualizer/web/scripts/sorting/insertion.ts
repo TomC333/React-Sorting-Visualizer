@@ -4,10 +4,10 @@ import { SortArgs, Sorter, SortReply } from './sorter';
 export class Insertion<T> implements Sorter<T> {
     sort(args: SortArgs<T>): SortReply<T> {
         let copyOfItems = [...args.items];
+
         let j = 0;
         let key = 0;
 
-        // Just insertion sort xD
         for (let i = 1; i < copyOfItems.length; i++) {
             key = i;
             j = i - 1;

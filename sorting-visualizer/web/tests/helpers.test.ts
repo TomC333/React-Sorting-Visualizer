@@ -27,13 +27,13 @@ describe('swapNumbers', () => {
     });
 
     test('should work with empty arrays', () => {
-        // just make sure that it doesn't throw errors
+        /* just make sure that it doesn't throw errors */
         swapNumbers([], 0, 1);
     });
 
     test('should handle out-of-bounds indices gracefully', () => {
         const arr = [10, 20];
-        // Swapping with an out-of-bounds index should not throw an error, but it may not do anything
+        /* Swapping with an out-of-bounds index should not throw an error, but it may not do anything */
         expect(() => swapNumbers(arr, -1, 1)).not.toThrow();
         expect(() => swapNumbers(arr, 1, 3)).not.toThrow();
         expect(arr).toEqual([10, 20]);
