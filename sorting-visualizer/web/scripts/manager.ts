@@ -13,8 +13,8 @@ export class Manager {
      */
     private initVisualizers() {
         const args: VisualizerArgs = {
-            numOfBars: 30,
-            maxHeight: 100,
+            numOfBars: 50,
+            maxHeight: window.innerHeight * 0.5,
             maxWidth: 5,
             parentID: '',
             baseID: '',

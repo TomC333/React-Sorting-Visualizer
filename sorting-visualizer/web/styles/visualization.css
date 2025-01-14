@@ -1,0 +1,17 @@
+.visualization-container {
+    width: 100%;
+    height: 100%;
+}
+
+.bars-visualizer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    height: fit-content;
+}
+
+.bar-container {
+    background-color: var(--accent-color);
+    border-radius: 0% 0% 5px 5px;
+}

@@ -9,7 +9,7 @@
     border-radius: 0.5rem;
     margin: 0.5rem;
     padding: 1rem;
-    transition: all 1s;
+    transition: font-size 1s;
     font-weight: bold;
     font-size: 1.3rem;
 }
@@ -41,7 +41,7 @@ select {
     border-radius: 0.5rem;
     margin: 0.5rem;
     padding: calc(1rem - 1px) 1rem;
-    transition: all 1s;
+    transition: font-size 1s;
     font-weight: bold;
     font-size: 1.3rem;
     border: unset;
@@ -62,7 +62,7 @@ select {
     border-radius: 0.5rem;
     margin: 0.5rem;
     padding: 1rem;
-    transition: all 1s;
+    transition: font-size 1s;
     font-weight: bold;
     font-size: 1.3rem;
     display: flex;

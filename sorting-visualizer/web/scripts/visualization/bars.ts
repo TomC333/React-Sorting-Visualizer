@@ -18,6 +18,7 @@ export class Bars<T> implements Visualizer<T> {
 
             const bar = this.createBarElement(
                 args.baseID + i,
+                args.classes,
                 args.maxWidth,
                 height,
             );
@@ -31,20 +32,23 @@ export class Bars<T> implements Visualizer<T> {
 
     private createBarElement(
         id: string,
+        classes: string[],
         width: number,
         height: number,
     ): HTMLDivElement {
         const div = document.createElement('div');
 
         div.id = id;
+        div.classList.add(...classes);
         div.style.height = height + 'px';
         div.style.width = width + 'px';
 
         return div;
     }
 
-    resize(maxHeight: number): void {
+    resize(maxHeight: number, maxWidth: number): void {
         console.log(maxHeight);
+        console.log(maxWidth);
     }
 
     items(): Item<T>[] {

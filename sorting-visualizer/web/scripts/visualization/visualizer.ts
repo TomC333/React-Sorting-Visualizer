@@ -5,7 +5,7 @@ export interface Visualizer<T> {
     init: (args: VisualizerArgs) => void;
 
     /* Resize function should scale elements height */
-    resize: (maxHeight: number) => void;
+    resize: (maxHeight: number, maxWidth: number) => void;
 
     /* Items function should return items stored inside class */
     items: () => Item<T>[];
