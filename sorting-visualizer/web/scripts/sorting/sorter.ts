@@ -41,6 +41,8 @@ export type AnimationStep<T> = {
     red: Item<T>[];
     /* This arrays length should be 0 or 2, 2 in case if some elements switched place */
     swap: Item<T>[];
+    /* Setting this value to true should set elements instead of swaping */
+    isSet?: boolean;
 };
 
 export type Item<T> = {

@@ -18,7 +18,7 @@ export class Manager {
     /* Function initializes visualizers */
     private initVisualizers(): void {
         const args: VisualizerArgs = {
-            numOfBars: 50,
+            numOfBars: 51,
             maxHeight: window.innerHeight * 0.5,
             maxWidth: 5,
             parentID: '',
@@ -54,8 +54,6 @@ export class Manager {
             '#algorithmSelect select',
         ) as HTMLSelectElement;
 
-        console.log(select.value);
-
         switch (select.value) {
             case 'insertion':
                 return new Insertion<number>();
@@ -79,6 +77,6 @@ export class Manager {
     }
 
     private delay(): number {
-        return 100;
+        return 10;
     }
 }

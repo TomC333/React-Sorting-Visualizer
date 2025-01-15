@@ -48,7 +48,7 @@ export class Bars<T> implements Visualizer<T> {
             /* Can't imagine other solution :D Bars can't be used with other types */
             this._items.push({ value: <T>height, id: id });
 
-            this._parentElement.appendChild(bar);
+            this._parentElement.prepend(bar);
         }
     }
 
@@ -108,6 +108,8 @@ export class Bars<T> implements Visualizer<T> {
         this._items = items;
         this._delay = delay;
         this._animationRunning = true;
+
+        console.log(steps);
 
         for (let i = 0; i < steps.length; i++) {
             clearAnimation(this._lastAnimationStep);

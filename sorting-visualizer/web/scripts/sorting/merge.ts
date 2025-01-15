@@ -1,8 +1,9 @@
-import { SortArgs, Sorter, SortReply } from './sorter';
+import { AnimationStep, SortArgs, Sorter, SortReply } from './sorter';
 
 export class Merge<T> implements Sorter<T> {
     sort(args: SortArgs<T>): SortReply<T> {
         let copyOfItems = [...args.items];
+        let steps: AnimationStep<T>[] = [];
 
         const mergeArrays = (
             start: number,
@@ -14,6 +15,16 @@ export class Merge<T> implements Sorter<T> {
             const resultArray = [];
 
             while (firstIndex < middle && secondIndex < end) {
+                steps.push({
+                    green: [
+                        copyOfItems[start],
+                        copyOfItems[middle],
+                        copyOfItems[end - 1],
+                    ],
+                    red: [copyOfItems[firstIndex], copyOfItems[secondIndex]],
+                    swap: [],
+                });
+
                 if (
                     args.compare(
                         copyOfItems[firstIndex],
@@ -34,6 +45,13 @@ export class Merge<T> implements Sorter<T> {
                 resultArray.push(copyOfItems[secondIndex]);
 
             for (let i = start; i < end; i++) {
+                steps.push({
+                    green: [],
+                    red: [copyOfItems[i]],
+                    swap: [{ value: <T>i, id: '' }, resultArray[i - start]],
+                    isSet: true,
+                });
+
                 copyOfItems[i] = resultArray[i - start];
             }
         };
@@ -53,6 +71,6 @@ export class Merge<T> implements Sorter<T> {
 
         mergeSortHelper(0, copyOfItems.length);
 
-        return { items: copyOfItems, steps: [] };
+        return { items: copyOfItems, steps: steps };
     }
 }

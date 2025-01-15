@@ -31,6 +31,13 @@ export function swapHTMLElements<T>(
     const div1 = document.getElementById(step.swap[0].id)!;
     const div2 = document.getElementById(step.swap[1].id)!;
 
+    if (step.isSet) {
+        const nThElement =
+            container.querySelectorAll('div')[<number>step.swap[0].value];
+        container.insertBefore(div2, nThElement);
+        return;
+    }
+
     const nextSibling1 = div1.nextElementSibling;
     const nextSibling2 = div2.nextElementSibling;
 
