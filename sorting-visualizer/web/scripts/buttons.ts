@@ -35,7 +35,7 @@ export class Buttons {
             args.visualizer().randomize();
         };
 
-        this._sortAction = () => {
+        this._sortAction = async () => {
             this.removeActions();
 
             const items = args.visualizer().items();
@@ -51,11 +51,9 @@ export class Buttons {
             this._endButton.classList.remove('disabled');
             this._endButton.addEventListener('click', this._endAction);
 
-            args.visualizer().sort(
-                sortReply.items,
-                sortReply.steps,
-                args.delay,
-            );
+            await args
+                .visualizer()
+                .sort(sortReply.items, sortReply.steps, args.delay);
         };
 
         this._endAction = () => {

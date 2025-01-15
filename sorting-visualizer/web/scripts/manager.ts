@@ -50,9 +50,11 @@ export class Manager {
     }
 
     private sorter(): Sorter<number> {
-        const select = document.getElementById(
-            'algorithmSelect',
+        const select = document.querySelector(
+            '#algorithmSelect select',
         ) as HTMLSelectElement;
+
+        console.log(select.value);
 
         switch (select.value) {
             case 'insertion':
@@ -77,6 +79,6 @@ export class Manager {
     }
 
     private delay(): number {
-        return 0;
+        return 100;
     }
 }

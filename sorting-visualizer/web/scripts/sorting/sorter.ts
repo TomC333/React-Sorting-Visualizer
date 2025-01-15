@@ -39,6 +39,8 @@ export type SortReply<T> = {
 export type AnimationStep<T> = {
     green: Item<T>[];
     red: Item<T>[];
+    /* This arrays length should be 0 or 2, 2 in case if some elements switched place */
+    swap: Item<T>[];
 };
 
 export type Item<T> = {

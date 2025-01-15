@@ -15,3 +15,11 @@
     background-color: var(--accent-color);
     border-radius: 0% 0% 5px 5px;
 }
+
+.bar-container.green {
+    background-color: green;
+}
+
+.bar-container.red {
+    background-color: red;
+}

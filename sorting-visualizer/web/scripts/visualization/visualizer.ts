@@ -20,7 +20,7 @@ export interface Visualizer<T> {
         items: Item<T>[],
         steps: AnimationStep<T>[],
         delay: () => number,
-    ) => void;
+    ) => Promise<void>;
 
     /* If sorting animation is still in progress function should end it immediately */
     end: () => void;
