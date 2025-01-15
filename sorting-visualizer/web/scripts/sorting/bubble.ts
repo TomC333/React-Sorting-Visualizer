@@ -1,4 +1,4 @@
-import { swapNumbers } from './helpers';
+import { swapElements } from './helpers';
 import { SortArgs, Sorter, SortReply } from './sorter';
 
 export class Bubble<T> implements Sorter<T> {
@@ -10,7 +10,7 @@ export class Bubble<T> implements Sorter<T> {
         for (let i = 0; i < copyOfItems.length; i++) {
             for (let j = 0; j < copyOfItems.length - i - 1; j++) {
                 if (args.compare(copyOfItems[j], copyOfItems[j + 1]) > 0) {
-                    swapNumbers(copyOfItems, j, j + 1);
+                    swapElements(copyOfItems, j, j + 1);
                     isSwapped = true;
                 }
             }

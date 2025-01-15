@@ -1,4 +1,4 @@
-import { swapNumbers } from './helpers';
+import { swapElements } from './helpers';
 import { SortArgs, Sorter, SortReply } from './sorter';
 
 export class Selection<T> implements Sorter<T> {
@@ -18,7 +18,7 @@ export class Selection<T> implements Sorter<T> {
 
         for (let i = 0; i < copyOfItems.length - 1; i++) {
             minIndex = findMinIndex(i);
-            swapNumbers(copyOfItems, i, minIndex);
+            swapElements(copyOfItems, i, minIndex);
         }
 
         return { items: copyOfItems, steps: [] };

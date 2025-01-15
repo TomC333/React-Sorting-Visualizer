@@ -1,8 +1,11 @@
+import { swapElements } from '../sorting/helpers';
 import { Item, AnimationStep } from '../sorting/sorter';
 import { Visualizer, VisualizerArgs } from './visualizer';
 
 export class Bars<T> implements Visualizer<T> {
     private _items: Item<T>[] = [];
+
+    private _parentElement!: HTMLDivElement;
 
     init(args: VisualizerArgs): void {
         this.addElements(args);
@@ -10,7 +13,9 @@ export class Bars<T> implements Visualizer<T> {
 
     private addElements(args: VisualizerArgs): void {
         const heightDiff = args.maxHeight / args.numOfBars;
-        const parentElement = document.getElementById(args.parentID)!;
+        this._parentElement = document.getElementById(
+            args.parentID,
+        ) as HTMLDivElement;
 
         for (let i = 0; i < args.numOfBars; i++) {
             const id = args.baseID + i;
@@ -26,7 +31,7 @@ export class Bars<T> implements Visualizer<T> {
             /* Can't imagine other solution :D Bars can't be used with other types */
             this._items.push({ value: <T>height, id: id });
 
-            parentElement.appendChild(bar);
+            this._parentElement.appendChild(bar);
         }
     }
 
@@ -55,7 +60,17 @@ export class Bars<T> implements Visualizer<T> {
         return this._items;
     }
 
-    randomize(): void {}
+    randomize(): void {
+        // shuffle items
+        for (let i = this._items.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            swapElements(this._items, i, j);
+        }
+
+        this._items
+            .map((x) => document.getElementById(x.id) as HTMLDivElement)
+            .forEach((x) => this._parentElement.appendChild(x));
+    }
 
     sort(
         items: Item<T>[],

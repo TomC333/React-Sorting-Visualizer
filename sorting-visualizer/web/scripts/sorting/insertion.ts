@@ -1,4 +1,4 @@
-import { swapNumbers } from './helpers';
+import { swapElements } from './helpers';
 import { SortArgs, Sorter, SortReply } from './sorter';
 
 export class Insertion<T> implements Sorter<T> {
@@ -16,7 +16,7 @@ export class Insertion<T> implements Sorter<T> {
                 j >= 0 &&
                 args.compare(copyOfItems[key], copyOfItems[j]) < 0
             ) {
-                swapNumbers(copyOfItems, key, j);
+                swapElements(copyOfItems, key, j);
 
                 key--;
                 j--;

@@ -30,7 +30,7 @@ export class Buttons {
         ) as HTMLDivElement;
     }
 
-    private initActions(args: ButtonArgs): void {bu
+    private initActions(args: ButtonArgs): void {
         this._shuffleAction = () => {
             args.visualizer().randomize();
         };
