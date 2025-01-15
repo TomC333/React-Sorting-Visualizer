@@ -1,3 +1,4 @@
+import { Buttons } from './buttons';
 import { Bars } from './visualization/bars';
 import { Visualizer, VisualizerArgs } from './visualization/visualizer';
 
@@ -6,6 +7,8 @@ export class Manager {
 
     constructor() {
         this.initVisualizers();
+
+        new Buttons();
     }
 
     /* Function initializes visualizers
