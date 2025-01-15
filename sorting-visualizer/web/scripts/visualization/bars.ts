@@ -57,9 +57,15 @@ export class Bars<T> implements Visualizer<T> {
 
     randomize(): void {}
 
-    sort(items: Item<T>[], steps: AnimationStep<T>, delay: () => number): void {
+    sort(
+        items: Item<T>[],
+        steps: AnimationStep<T>[],
+        delay: () => number,
+    ): void {
         console.log(items);
         console.log(steps);
         console.log(delay());
     }
+
+    end(): void {}
 }

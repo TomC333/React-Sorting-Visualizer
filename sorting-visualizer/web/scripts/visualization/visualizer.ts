@@ -18,9 +18,12 @@ export interface Visualizer<T> {
     /* Sort function should update items && create sorting animation */
     sort: (
         items: Item<T>[],
-        steps: AnimationStep<T>,
+        steps: AnimationStep<T>[],
         delay: () => number,
     ) => void;
+
+    /* If sorting animation is still in progress function should end it immediately */
+    end: () => void;
 }
 
 export type VisualizerArgs = {

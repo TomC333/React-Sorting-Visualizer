@@ -1,4 +1,4 @@
-import { Sorter } from './sorting/sorter';
+import { Item, SortArgs, Sorter } from './sorting/sorter';
 import { Visualizer } from './visualization/visualizer';
 
 export class Buttons {
@@ -10,9 +10,9 @@ export class Buttons {
     private _sortAction!: () => void;
     private _endAction!: () => void;
 
-    constructor() {
+    constructor(args: ButtonArgs) {
         this.selectElements();
-        this.initActions();
+        this.initActions(args);
         this.addInitialActions();
     }
 
@@ -30,21 +30,32 @@ export class Buttons {
         ) as HTMLDivElement;
     }
 
-    private initActions(): void {
+    private initActions(args: ButtonArgs): void {
         this._shuffleAction = () => {
-            // call shuffle on visualizer
+            args.visualizer().randomize();
         };
 
         this._sortAction = () => {
             this.removeActions();
 
-            // get items from visualizer
-            // get sorter class
-            // sort and get animation from sorter class
-            // call visualizer sort
+            const items = args.visualizer().items();
+            const sorter = args.sorter();
+            const sortArgs: SortArgs<number> = {
+                items: items,
+                compare: args.compare,
+                storeSteps: true,
+                stepsFrequency: 1,
+            };
+            const sortReply = sorter.sort(sortArgs);
 
             this._endButton.classList.remove('disabled');
             this._endButton.addEventListener('click', this._endAction);
+
+            args.visualizer().sort(
+                sortReply.items,
+                sortReply.steps,
+                args.delay,
+            );
         };
 
         this._endAction = () => {
@@ -53,7 +64,7 @@ export class Buttons {
             this._endButton.classList.add('disabled');
             this._endButton.removeEventListener('click', this._endAction);
 
-            // end sorting :D
+            args.visualizer().end();
         };
     }
 
@@ -87,5 +98,7 @@ export class Buttons {
 
 export type ButtonArgs = {
     sorter: () => Sorter<number>;
+    compare: (a: Item<number>, b: Item<number>) => number;
     visualizer: () => Visualizer<number>;
+    delay: () => number;
 };
