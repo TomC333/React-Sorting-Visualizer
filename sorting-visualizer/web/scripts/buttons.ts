@@ -54,6 +54,8 @@ export class Buttons {
             await args
                 .visualizer()
                 .sort(sortReply.items, sortReply.steps, args.delay);
+
+            this._endAction();
         };
 
         this._endAction = () => {

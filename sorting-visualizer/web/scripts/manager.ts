@@ -10,6 +10,8 @@ import { Visualizer, VisualizerArgs } from './visualization/visualizer';
 export class Manager {
     private _bars!: Visualizer<number>;
 
+    private MAX_DELAY = 100;
+
     constructor() {
         this.initVisualizers();
         this.initButtons();
@@ -77,6 +79,11 @@ export class Manager {
     }
 
     private delay(): number {
-        return 10;
+        const slide = document.getElementById(
+            'sortingSpeedSlider',
+        ) as HTMLInputElement;
+        const value = +slide.value;
+
+        return this.MAX_DELAY - value;
     }
 }
