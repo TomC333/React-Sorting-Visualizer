@@ -1,7 +1,7 @@
 # Sorting Visualizer ✨
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/Toms343/Sorting-Visualizer)
-[![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/Toms343/Sorting-Visualizer/blob/main/LICENSE)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/TomC333/Sorting-Visualizer)
+[![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/TomC333/Sorting-Visualizer/blob/main/LICENSE)
 
 ## Background 🤯
 
