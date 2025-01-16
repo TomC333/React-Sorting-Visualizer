@@ -1,5 +1,8 @@
 # Sorting Visualizer ✨
 
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/Toms343/Sorting-Visualizer)
+[![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/Toms343/Sorting-Visualizer/blob/main/LICENSE)
+
 ## Background 🤯
 
 At the beginning, I watched [this video](https://youtu.be/pFXYym4Wbkc?list=PL3lfepputJuGAaI3S7FvcBIutzHNtZ_pb), and at the same time, my friend needed help with React Native. Since I didn’t knew React Native, and I wanted to create a project, I decided to create a sorting visualizer to learn React Native and, of course, to create some repos on GitHub. 😄
@@ -19,4 +22,4 @@ The setup is as simple as it gets!
 3. Open a terminal and run `npm install` to install all the dependencies.
 4. After that, simply run `npm run dev` for a local development environment.
 
-If you just want to test the webpage, you can visit this [link](sorting-visualizer-ten-phi.vercel.app)
+If you just want to test the webpage, you can visit this [link](https://sorting-visualizer-ten-phi.vercel.app)
