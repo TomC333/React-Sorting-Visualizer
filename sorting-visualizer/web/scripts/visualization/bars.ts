@@ -23,7 +23,6 @@ export class Bars<T> implements Visualizer<T> {
         this.addElements(args);
 
         this._initialMaxHeight = args.maxHeight;
-        this._initalMaxWidth = args.maxWidth;
     }
 
     private addElements(args: VisualizerArgs): void {
