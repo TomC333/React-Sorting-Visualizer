@@ -9,7 +9,6 @@ export class Bars<T> implements Visualizer<T> {
     private _parentElement!: HTMLDivElement;
 
     private _initialMaxHeight!: number;
-    private _initalMaxWidth!: number;
 
     private _lastAnimationStep: AnimationStep<T> = {
         green: [],
@@ -106,8 +105,6 @@ export class Bars<T> implements Visualizer<T> {
         this._items = items;
         this._delay = delay;
         this._animationRunning = true;
-
-        console.log(steps);
 
         for (let i = 0; i < steps.length; i++) {
             clearAnimation(this._lastAnimationStep);
