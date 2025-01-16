@@ -70,7 +70,6 @@ export class Bars<T> implements Visualizer<T> {
 
     resize(maxHeight: number, maxWidth: number): void {
         const heightScale = maxHeight / this._initialMaxHeight;
-        const widthScale = maxWidth / this._initalMaxWidth;
 
         this._items
             .map((x) => [
@@ -81,8 +80,7 @@ export class Bars<T> implements Visualizer<T> {
                 (<HTMLDivElement>element).style.height =
                     <number>value * heightScale + 'px';
 
-                (<HTMLDivElement>element).style.width =
-                    <number>value * widthScale + 'px';
+                (<HTMLDivElement>element).style.width = maxWidth + 'px';
             });
     }
 

@@ -19,10 +19,12 @@ export class Manager {
 
     /* Function initializes visualizers */
     private initVisualizers(): void {
+        const numberOfBars: number = 50;
+
         const args: VisualizerArgs = {
-            numOfBars: 51,
+            numOfBars: numberOfBars,
             maxHeight: window.innerHeight * 0.5,
-            maxWidth: 5,
+            maxWidth: (window.innerWidth * 0.2) / numberOfBars,
             parentID: '',
             baseID: '',
             classes: [],
@@ -31,6 +33,7 @@ export class Manager {
         args.parentID = 'barsVisualizer';
         args.baseID = 'bar';
         args.classes = ['bar-container'];
+
         this.initBarsVisualizer(args);
     }
 
@@ -38,6 +41,15 @@ export class Manager {
         this._bars = new Bars<number>();
 
         this._bars.init(args);
+
+        window.addEventListener('resize', () => {
+            const numberOfBars: number = 50;
+
+            this._bars.resize(
+                window.innerHeight * 0.5,
+                (window.innerWidth * 0.2) / numberOfBars,
+            );
+        });
     }
 
     private initButtons(): void {
