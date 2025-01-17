@@ -11,14 +11,14 @@ export class Bubble<T> implements Sorter<T> {
         for (let i = 0; i < copyOfItems.length; i++) {
             for (let j = 0; j < copyOfItems.length - i - 1; j++) {
                 steps.push({
-                    green: [],
+                    green: [copyOfItems[copyOfItems.length - i - 1]],
                     red: [copyOfItems[j], copyOfItems[j + 1]],
                     swap: [],
                 });
 
                 if (args.compare(copyOfItems[j], copyOfItems[j + 1]) > 0) {
                     steps.push({
-                        green: [],
+                        green: [copyOfItems[copyOfItems.length - i - 1]],
                         red: [copyOfItems[j], copyOfItems[j + 1]],
                         swap: [copyOfItems[j], copyOfItems[j + 1]],
                     });

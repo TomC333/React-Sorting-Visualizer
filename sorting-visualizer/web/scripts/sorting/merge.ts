@@ -47,7 +47,7 @@ export class Merge<T> implements Sorter<T> {
             for (let i = start; i < end; i++) {
                 steps.push({
                     green: [],
-                    red: [copyOfItems[i]],
+                    red: [resultArray[i - start]],
                     swap: [{ value: <T>i, id: '' }, resultArray[i - start]],
                     isSet: true,
                 });
