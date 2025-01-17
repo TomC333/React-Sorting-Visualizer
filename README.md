@@ -13,6 +13,8 @@ At the end of the day, the project is better from a functionality perspective: a
 
 But code looks like a shit again 💩
 
+P.S The merge sort animation might seem a bit confusing because instead of overwriting element values, I simply change their positions... This is HTML! _This is merge sort!_ 😎
+
 ## Setup 🌱
 
 The setup is as simple as it gets!
