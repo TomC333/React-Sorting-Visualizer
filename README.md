@@ -9,6 +9,7 @@ At the beginning, I watched [this video](https://youtu.be/pFXYym4Wbkc?list=PL3lf
 
 Even though the project was functional, the code was terrible! 😅 Most things were hardcoded, some buttons weren’t even working properly, and the app wasn’t responsive at all. So, in 2025, I decided to rewrite it using vanilla TypeScript. I wanted to make it more fancy, create some generic classes, write test cases, and throw in all the extra stuff. 😆
 
+## Achievements 🏆 or 💩? 
 At the end of the day, the project is better from a functionality perspective: all the buttons are working, sorting animations are smoother, and the webpage is responsive. It's still not perfect, but it’s definitely better than before! 😅
 
 But code looks like a shit again 💩
